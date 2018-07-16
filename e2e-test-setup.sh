@@ -1,4 +1,4 @@
-#!/bin/bash  
+#!/bin/bash
 # Purpose of this script is to clean lisk database and create some tranactions
 
 if [ -z "$1" ]
