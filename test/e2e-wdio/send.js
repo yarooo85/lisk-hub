@@ -41,7 +41,7 @@ describe('Send', () => {
     // walletPage.getDisplayedTxsNumber().should.be.equal(25);
   });
 
-  it('should allow to send when enough funds and correct address form', () => {
+  it('should allow to send when using launch protocol', () => {
     const recipient = '4995063339468361088L';
     const amount = '5';
 

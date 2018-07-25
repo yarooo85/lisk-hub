@@ -1,0 +1,13 @@
+{
+  "extends": "../../.eslintrc",
+  "env": {
+    "mocha": true,
+    "browser": true
+  },
+  "rules": {
+    "new-cap": ["error", {
+      "capIsNewExceptions" : [
+      ]
+    }]
+  }
+}

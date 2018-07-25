@@ -7,7 +7,7 @@ class LoginPage {
    */
   get _passphraseInput() { return $('.passphrase input'); }
   get _loginButton() { return $('.login-button'); }
-  get _createLiskIdButton() { return $('._new_account_button'); }
+  get _createLiskIdButton() { return $('.new-account-button'); }
   get _networkSelect() { return $('.network'); }
   get _networkSelectList() { return this._networkSelect.$$('ul li'); }
   get _nodeAddressInput() { return $('.address input'); }
@@ -16,7 +16,7 @@ class LoginPage {
    * Page Methods
    */
   waitForLoad() {
-    this._loginButton.waitForVisible();
+    this._passphraseInput.waitForVisible();
     return this;
   }
 

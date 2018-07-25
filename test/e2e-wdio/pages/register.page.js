@@ -2,13 +2,13 @@ class RegisterPage {
   /**
    * Elements
    */
-  get _backButton() { return $('.multistep-button'); }
+  get _backButton() { return $('.multistep-back'); }
 
   /**
    * Page Methods
    */
   waitForLoad() {
-    this._loginButton.waitForVisible();
+    this._backButton.waitForVisible();
     return this;
   }
 

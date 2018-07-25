@@ -2,6 +2,7 @@ import walletPage from './wallet.page';
 import BasePage from './base.page';
 import transfer from '../blocks/transfer.block';
 import activity from '../blocks/activity.block';
+import header from '../blocks/header.block';
 
 class DashboardPage extends BasePage {
 
@@ -9,6 +10,7 @@ class DashboardPage extends BasePage {
     super();
     this.transfer = transfer;
     this.activity = activity;
+    this.header = header;
   }
   /**
    * Elements
