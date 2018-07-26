@@ -13,7 +13,7 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.dev --env.dev --hot",
     "build-prod": "webpack --config ./config/webpack.config.prod --env.prod",
     "build-electron": "webpack --config ./config/webpack.config.electron",
-    "e2e-test": "protractor protractor.conf.js",
+    "e2e-test": "node_modules/.bin/wdio wdio.conf.js",
     "test": "karma start",
     "bundlesize": "bundlesize",
     "analyze-bundles": "webpack  --config ./config/webpack.config.analyze",

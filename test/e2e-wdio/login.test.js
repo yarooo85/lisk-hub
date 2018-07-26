@@ -1,7 +1,4 @@
-import loginPage from './pages/login.page';
-import registerPage from './pages/register.page';
-import accountPage from './pages/account.page';
-import dashBoardPage from './pages/dashboard.page';
+import { loginPage, registerPage, accountPage, dashboardPage} from './pages/pages';
 import accounts from '../constants/accounts';
 
 describe('Login Page', () => {
@@ -43,7 +40,8 @@ describe('Login Page', () => {
       .login(accounts.genesis.passphrase);
     accountPage
       .open(address)
-      .accountInfo.getDelegateName().should.be.equal(name, `in test network ${address} name should be equal ${name}`);
+      .accountInfo.getDelegateName()
+      .should.be.equal(name, `in test network ${address} name should be equal ${name}`);
   });
 
   it('“Switch network” is on -> Logging in local network', () => {
@@ -55,7 +53,8 @@ describe('Login Page', () => {
       .login(accounts.genesis.passphrase);
     accountPage
       .open(address)
-      .accountInfo.getDelegateName().should.be.equal(name, `in local network ${address} name should be equal ${name}`);
+      .accountInfo.getDelegateName()
+      .should.be.equal(name, `in local network ${address} name should be equal ${name}`);
   });
 
   it('Successful login -> Address and Balance are correct', () => {
@@ -63,10 +62,12 @@ describe('Login Page', () => {
       .open_NetworkSwitcherEnabled()
       .chooseNetwork('local')
       .login(accounts.genesis.passphrase);
-    dashBoardPage
-      .header.getAddress().should.be.equal(accounts.genesis.address, 'account address should be correct');
-    // TODO: Need classname for balance
-    //dashBoardPage.header.getBalance().should.be.equal(accounts.genesis.address, 'account balance should be correct')
+    dashboardPage
+      .header.getAddress()
+      .should.be.equal(accounts.genesis.address, 'account address should be correct');
+    dashboardPage
+      .header.getBalance()
+      .should.be.equal(accounts.genesis.balance, 'account balance should be correct')
   });
 
 
