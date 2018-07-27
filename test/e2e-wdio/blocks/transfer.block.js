@@ -70,5 +70,3 @@ class TransferBlock {
 }
 
 export default new TransferBlock();
-16313739661670634666L
-45471484165918470000L
