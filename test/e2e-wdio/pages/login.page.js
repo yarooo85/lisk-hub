@@ -51,7 +51,7 @@ class LoginPage {
       case 'local':
         this._networkSelectList[2].click();
         this._nodeAddressInput.click();
-        this._nodeAddressInput.setValue('localhost:4000');
+        this._nodeAddressInput.setValue(browser.props.coreUrl);
         break;
       default:
         throw new Error('netWorkNickname should be set to one of: main / net / local');

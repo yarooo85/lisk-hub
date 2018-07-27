@@ -1,3 +1,4 @@
+import { step } from 'mocha-steps';
 import { loginPage, registerPage, accountPage, dashboardPage} from './pages/pages';
 import accounts from '../constants/accounts';
 
@@ -58,16 +59,17 @@ describe('Login Page', () => {
   });
 
   it('Successful login -> Address and Balance are correct', () => {
+    // TODO: use account that would be 100% untouched
     loginPage
       .open_NetworkSwitcherEnabled()
       .chooseNetwork('local')
-      .login(accounts.genesis.passphrase);
+      .login(accounts['send all account'].passphrase);
     dashboardPage
       .header.getAddress()
-      .should.be.equal(accounts.genesis.address, 'account address should be correct');
+      .should.be.equal(accounts['send all account'].address, 'account address should be correct');
     dashboardPage
       .header.getBalance()
-      .should.be.equal(accounts.genesis.balance, 'account balance should be correct');
+      .should.be.equal(accounts['send all account'].balance, 'account balance should be correct');
   });
 
 

@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+const props = {
+  hubUrl: 'http://localhost:8080/',
+  coreUrl: 'localhost:4000',
+}
+
 exports.config = {
 
   //
@@ -60,7 +65,7 @@ exports.config = {
   sync: true,
   //
   // Level of logging verbosity: silent | verbose | command | data | result | error
-  logLevel: 'data',
+  logLevel: 'error',
   //
   // Enables colors for log output.
   coloredLogs: true,
@@ -79,7 +84,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'http://localhost:8080/',
+  baseUrl: props.hubUrl,
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -171,9 +176,12 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
   before(capabilities, specs) {
+    // Disable onboarding feature default activation
     browser.url('/');
     browser.localStorage('POST', { key: 'settings', value: '{ "onBoarding": false }' });
     browser.refresh();
+    // Assigning custom properties to browser object
+    browser.props = props;
   },
   /**
      * Runs before a WebdriverIO command gets executed.

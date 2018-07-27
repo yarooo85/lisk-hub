@@ -39,6 +39,7 @@ const accounts = {
     publicKey: 'c5e64031407c3ca8d526bf7404f7c78ab60ea0792e90393a73b3b06a8c8841d4',
     serverPublicKey: 'c5e64031407c3ca8d526bf7404f7c78ab60ea0792e90393a73b3b06a8c8841d4',
     address: '16422276087748907680L',
+    balance: 10010000000,
   },
   'second passphrase account': {
     passphrase: 'awkward service glimpse punch genre calm grow life bullet boil match like',
@@ -54,7 +55,7 @@ const accounts = {
     publicKey: 'a1fa251b368939ed2aa8c620e955cb4537c06a351fa50e928ec21e89372e7494',
     address: '94495548317450502L',
     balance: 0,
-  },
+  }
 };
 accounts['any account'] = accounts.genesis;
 

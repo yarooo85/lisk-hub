@@ -1,5 +1,5 @@
 import { loginPage, dashboardPage, delegatesPage, sidechainsPage, settingsPage } from './pages/pages';
-import { generateRandomAddress, waitForTxConfirmation } from './support/utils';
+import { generateRandomAddress, waitForTxConfirmation, getFormattedDate } from './support/utils';
 import accounts from '../constants/accounts';
 
 describe('Transfer', () => {
@@ -20,8 +20,9 @@ describe('Transfer', () => {
       .next()
       .send();
     const tx = dashboardPage.activity.getTXByNumber(1);
+    dashboardPage.activity.isTXPendingByNumber(1).should.equal(true, 'TX should be pending right after sending');
     tx.address.should.be.equal(randomRecipient);
-    // tx.date.should.be.equal(randomRecipient);
+    // tx.date.should.be.equal(getFormattedDate());
     tx.amount.should.be.equal(amount);
   });
 });

@@ -11,11 +11,13 @@ class HeaderBlock {
    * Block Methods
    */
   getAddress() {
+    this._address.waitForVisible();
     return this._address.getText();
   }
 
   getBalance() {
-    return this._balance.getText().replace(/,/g, '').replace('.','') + '00';
+    this._balance.waitForVisible();
+    return this._balance.getText().replace(/,/g, '') * 10e7;
   }
 
 }

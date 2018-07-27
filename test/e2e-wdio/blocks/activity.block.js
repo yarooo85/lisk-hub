@@ -11,6 +11,7 @@ class ActivityBlock {
   get _transactionAmount() { return this._transactionsTableRows[this.txNumber].$('#transactionAmount span'); }
   get _seeAllLink() { return $('.seeAllLink'); }
   get _allTab() { return $('.filter-all'); }
+  get _spinner() { return this._transactionsTableRows[this.txNumber].$('.spinner'); }
 
   /**
    * Block Methods
@@ -37,6 +38,11 @@ class ActivityBlock {
       date: this._transactionDate.getText(),
       amount: this._transactionAmount.getText(),
     };
+  }
+
+  isTXPendingByNumber(number) {
+    this.txNumber = number - 1;
+    return this._spinner.isVisible();
   }
 
 
