@@ -50,11 +50,11 @@ class TransferBlock {
 
   send() {
     this._sendButton.click();
+    this._resultBox.waitForVisible();
     return this;
   }
 
   getSendTxResultMessage() {
-    this._resultBox.waitForVisible();
     return this._resultBox.getText();
   }
 
@@ -70,4 +70,5 @@ class TransferBlock {
 }
 
 export default new TransferBlock();
-
+16313739661670634666L
+45471484165918470000L

@@ -67,7 +67,7 @@ describe('Login Page', () => {
       .should.be.equal(accounts.genesis.address, 'account address should be correct');
     dashboardPage
       .header.getBalance()
-      .should.be.equal(accounts.genesis.balance, 'account balance should be correct')
+      .should.be.equal(accounts.genesis.balance, 'account balance should be correct');
   });
 
 

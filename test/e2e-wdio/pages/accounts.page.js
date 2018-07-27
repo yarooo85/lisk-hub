@@ -16,7 +16,7 @@ class AccountsPage {
   }
 
   open() {
-    browser.url('/#/account');
+    browser.url('/#/accounts');
     return this;
   }
 

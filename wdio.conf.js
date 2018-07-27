@@ -1,3 +1,4 @@
+const fs = require('fs');
 
 exports.config = {
 
@@ -210,8 +211,24 @@ exports.config = {
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) ends.
      * @param {Object} test test details
      */
-  // afterTest: function (test) {
-  // },
+  afterTest: function (test) {
+    /**
+     * Screenshot making solution to get named screenshots
+     * Still need automatically generated screenshots by wdio for Allure report
+     */
+
+    if (!test.passed) {
+      const SCREENSHOT_FOLDER = './e2e-test-screenshots';
+      const filename = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+      const filePath = `${SCREENSHOT_FOLDER}/${filename}.png`;
+
+      if (!fs.existsSync(SCREENSHOT_FOLDER)) fs.mkdirSync(SCREENSHOT_FOLDER);
+      browser.saveScreenshot(filePath);
+      console.log('\n\tScreenshot location:', filePath, '\n');
+
+      // console.log('\tJS Errors:\n', browser.log('browser').value);
+    }
+  },
   /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details

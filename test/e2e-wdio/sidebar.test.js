@@ -35,8 +35,7 @@ describe('Sidebar', () => {
 
   it('Sidechains menu item lead to corresponding page', () => {
     dashboardPage.sidebar.goSidechains();
-    sidechainsPage
-      .waitForLoad();
+    sidechainsPage.waitForLoad();
   });
 
   it('Settings menu item lead to corresponding page', () => {

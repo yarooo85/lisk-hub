@@ -25,7 +25,7 @@ class TransactionRow extends React.Component {
           </div>
         </div>
         <div className={`${styles.rightText} ${grid['col-sm-2']} transactions-cell`}>
-          <div className={`${styles.hiddenXs}`}>
+          <div className={`transactionDate ${styles.hiddenXs}`}>
             {props.value.confirmations ? <DateFromTimestamp time={props.value.timestamp} />
               : <Spinner />}
           </div>
