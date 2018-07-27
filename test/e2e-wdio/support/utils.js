@@ -3,5 +3,5 @@ export function waitForTxConfirmation() {
 }
 
 export function generateRandomAddress() {
-  return `18${Math.random() * 10e17}L`;
+  return `183${Math.random() * 10e16}L`;
 }
