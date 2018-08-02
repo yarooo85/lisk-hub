@@ -5,12 +5,29 @@ class LoginPage {
   /**
    * Elements
    */
-  get _passphraseInput() { return $('.passphrase input'); }
-  get _loginButton() { return $('.login-button'); }
-  get _createLiskIdButton() { return $('.new-account-button'); }
-  get _networkSelect() { return $('.network'); }
-  get _networkSelectList() { return this._networkSelect.$$('ul li'); }
-  get _nodeAddressInput() { return $('.address input'); }
+  get _passphraseInput() {
+    return $('.passphrase input');
+  }
+
+  get _loginButton() {
+    return $('.login-button');
+  }
+
+  get _createLiskIdButton() {
+    return $('.new-account-button');
+  }
+
+  get _networkSelect() {
+    return $('.network');
+  }
+
+  get _networkSelectList() {
+    return this._networkSelect.$$('ul li');
+  }
+
+  get _nodeAddressInput() {
+    return $('.address input');
+  }
 
   /**
    * Page Methods
@@ -28,6 +45,7 @@ class LoginPage {
 
   open_NetworkSwitcherEnabled() {
     browser.url('#/?showNetwork=true');
+    this.waitForLoad();
     return this;
   }
 
@@ -38,7 +56,7 @@ class LoginPage {
     dashboardPage.waitForLoad();
   }
 
-  chooseNetwork(networkNickname){
+  chooseNetwork(networkNickname) {
     this._networkSelect.click();
     this._networkSelectList[0].waitForVisible();
     switch (networkNickname) {
@@ -59,7 +77,7 @@ class LoginPage {
     return this;
   }
 
-  createLiskId(){
+  createLiskId() {
     this._createLiskIdButton.click();
     return registerPage.waitForLoad();
   }

@@ -78,7 +78,7 @@ exports.config = {
   bail: 0,
   //
   // Saves a screenshot to a given path if a command fails.
-  screenshotPath: './e2e-test-screenshots',
+  screenshotPath: './test/e2e-wdio/e2e-screenshots',
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -133,7 +133,14 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: http://webdriver.io/guide/reporters/dot.html
-  reporters: ['spec'],
+  reporters: ['spec', 'allure'],
+  reporterOptions: {
+    allure: {
+      outputDir: './test/e2e-wdio/allure-results',
+      disableWebdriverStepsReporting: false,
+      disableWebdriverScreenshotsReporting: false,
+    },
+  },
   //
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -226,7 +233,7 @@ exports.config = {
      */
 
     if (!test.passed) {
-      const SCREENSHOT_FOLDER = './e2e-test-screenshots';
+      const SCREENSHOT_FOLDER = this.screenshotPath;
       const filename = encodeURIComponent(test.title.replace(/\s+/g, '-'));
       const filePath = `${SCREENSHOT_FOLDER}/${filename}.png`;
 

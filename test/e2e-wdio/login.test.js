@@ -1,4 +1,3 @@
-import { step } from 'mocha-steps';
 import { loginPage, registerPage, accountPage, dashboardPage} from './pages/pages';
 import accounts from '../constants/accounts';
 
