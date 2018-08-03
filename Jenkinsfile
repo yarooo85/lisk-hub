@@ -162,6 +162,5 @@ node('lisk-hub') {
         liskSlackSend('good', "Recovery: build ${build_info} was successful.")
       }
     }
-    }
   }
 }
