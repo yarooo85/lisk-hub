@@ -101,7 +101,7 @@ node('lisk-hub') {
 	    cd $WORKSPACE/$BRANCH_NAME
 	    cp /home/lisk/blockchain_explorer.db.gz ./blockchain.db.gz
 	    LISK_VERSION=1.0.0-rc.1 make coldstart
-	    LISK_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
+	    export LISK_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
 	    cd -
 
             # Run end-to-end tests
