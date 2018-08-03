@@ -133,7 +133,7 @@ node('lisk-hub') {
                           jdk: '',
                           properties: [],
                           reportBuildPolicy: 'ALWAYS',
-                          results: [[path: 'target/test/e2e-wdio/allure-results']]
+                          results: [[path: 'test/e2e-wdio/allure-results']]
                   ])
         }
       }
