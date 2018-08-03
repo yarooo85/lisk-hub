@@ -2,8 +2,8 @@ const fs = require('fs');
 
 const props = {
   hubUrl: 'http://localhost:8080/',
-  coreUrl: 'localhost:4000',
-}
+  coreUrl: process.env.LISK_URL || 'http://localhost:4000',
+};
 
 exports.config = {
 

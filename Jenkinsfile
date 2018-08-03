@@ -101,24 +101,14 @@ node('lisk-hub') {
 	    cd $WORKSPACE/$BRANCH_NAME
 	    cp /home/lisk/blockchain_explorer.db.gz ./blockchain.db.gz
 	    LISK_VERSION=1.0.0-rc.1 make coldstart
-	    LISK_PORT=$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
+	    LISK_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
 	    cd -
 
             # Run end-to-end tests
 
-            npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
-            if [ -z $CHANGE_BRANCH ]; then
-              npm run --silent e2e-test -- --params.baseURL http://127.0.0.1:300$N --params.liskCoreURL http://127.0.0.1:$LISK_PORT --cucumberOpts.tags @advanced
-              npm run --silent e2e-test -- --params.baseURL http://127.0.0.1:300$N --params.liskCoreURL https://testnet.lisk.io --cucumberOpts.tags @testnet --params.useTestnetPassphrase true
-            else
-              echo "Skipping @testnet end-to-end tests because we're not on 'development' branch"
-            fi
-            npm run --silent e2e-test -- --params.baseURL http://127.0.0.1:300$N --params.liskCoreURL http://127.0.0.1:$LISK_PORT
-            if [ -z $CHANGE_BRANCH ]; then
-              npm run --silent e2e-test -- --params.baseURL http://127.0.0.1:300$N --cucumberOpts.tags @testnet --params.useTestnetPassphrase true --params.network testnet
-            else
-              echo "Skipping @testnet end-to-end tests because we're not on 'development' branch"
-            fi
+        npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
+
+        npm run e2e:test -- --params.baseURL http://127.0.0.1:300$N
             '''
           }
         }
@@ -157,6 +147,20 @@ node('lisk-hub') {
     dir('node_modules') {
       deleteDir()
     }
+
+    sh 'npm run e2e:generate'
+    steps {
+        script {
+                allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/test/e2e-wdio/allure-results']]
+                ])
+        }
+        }
+
 
     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
       /* delete all files on success */
