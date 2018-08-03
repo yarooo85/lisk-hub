@@ -144,17 +144,13 @@ node('lisk-hub') {
     # cat reports/cucumber_report.json | ./node_modules/.bin/cucumber-junit > reports/cucumber_report.xml
     '''
 
-    /* cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/*/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, fileCoverageTargets: '100, 0, 0', lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII'
-    junit 'reports/junit_report.xml'
-    junit 'reports/cucumber_report.xml' */
+    // cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/*/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, fileCoverageTargets: '100, 0, 0', lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII'
+    // junit 'reports/junit_report.xml'
+    // junit 'reports/cucumber_report.xml'
 
     dir('node_modules') {
       deleteDir()
     }
-
-    sh 'npm run e2e:generate'
-
-
 
     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
       /* delete all files on success */
@@ -165,8 +161,7 @@ node('lisk-hub') {
         build_info = getBuildInfo()
         liskSlackSend('good', "Recovery: build ${build_info} was successful.")
       }
-    } else {
-      archiveArtifacts allowEmptyArchive: true, artifacts: 'test/e2e-wdio/e2e-test-screenshots/'
+    }
     }
   }
 }
