@@ -126,6 +126,17 @@ node('lisk-hub') {
       '''
     }
   } finally {
+      steps {
+        script {
+                  allure([
+                          includeProperties: false,
+                          jdk: '',
+                          properties: [],
+                          reportBuildPolicy: 'ALWAYS',
+                          results: [[path: 'target/test/e2e-wdio/allure-results']]
+                  ])
+        }
+      }
     ansiColor('xterm') {
       sh '''
       cd $WORKSPACE/$BRANCH_NAME
@@ -149,17 +160,7 @@ node('lisk-hub') {
     }
 
     sh 'npm run e2e:generate'
-    steps {
-        script {
-                allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'target/test/e2e-wdio/allure-results']]
-                ])
-        }
-    }
+
 
 
     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
