@@ -126,17 +126,13 @@ node('lisk-hub') {
       '''
     }
   } finally {
-      step {
-        script {
-                  allure([
+        allure([
                           includeProperties: false,
                           jdk: '',
                           properties: [],
                           reportBuildPolicy: 'ALWAYS',
                           results: [[path: 'test/e2e-wdio/allure-results']]
-                  ])
-        }
-      }
+        ])
     ansiColor('xterm') {
       sh '''
       cd $WORKSPACE/$BRANCH_NAME
