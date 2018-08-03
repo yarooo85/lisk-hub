@@ -17,8 +17,6 @@
     "e2e:report": "allure generate ./test/e2e-wdio/allure-results --output ./test/e2e-wdio/allure-report --clean",
     "e2e:report:open": "allure open ./test/e2e-wdio/allure-report",
     "e2e:clean": "rm -rf ./test/e2e-wdio/allure-results ./test/e2e-wdio/allure-report ./tests/e2e/e2e-screenshots",
-    "e2e-test": "protractor protractor.conf.js",
-    "cypress:open": "cypress open",
     "test": "karma start",
     "bundlesize": "bundlesize",
     "analyze-bundles": "webpack  --config ./config/webpack.config.analyze",
