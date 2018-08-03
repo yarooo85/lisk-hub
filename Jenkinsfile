@@ -108,7 +108,7 @@ node('lisk-hub') {
 
         npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
 
-        npm run e2e:test -- --baseURL=http://127.0.0.1:300$N
+        npm run e2e:test -- --baseUrl=http://127.0.0.1:300$N
             '''
           }
         }
@@ -172,7 +172,7 @@ node('lisk-hub') {
         liskSlackSend('good', "Recovery: build ${build_info} was successful.")
       }
     } else {
-      archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-test-screenshots/'
+      archiveArtifacts allowEmptyArchive: true, artifacts: 'test/e2e-wdio/e2e-test-screenshots/'
     }
   }
 }
