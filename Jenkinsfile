@@ -126,7 +126,7 @@ node('lisk-hub') {
       '''
     }
   } finally {
-      steps {
+      step {
         script {
                   allure([
                           includeProperties: false,
