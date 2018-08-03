@@ -108,7 +108,7 @@ node('lisk-hub') {
 
         npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
 
-        npm run e2e:test -- --baseURL http://127.0.0.1:300$N
+        npm run e2e:test -- --baseURL=http://127.0.0.1:300$N
             '''
           }
         }
@@ -159,7 +159,7 @@ node('lisk-hub') {
                         results: [[path: 'target/test/e2e-wdio/allure-results']]
                 ])
         }
-        }
+    }
 
 
     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
