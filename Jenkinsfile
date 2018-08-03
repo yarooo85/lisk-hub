@@ -127,11 +127,8 @@ node('lisk-hub') {
     }
   } finally {
         allure([
-                          includeProperties: false,
-                          jdk: '',
-                          properties: [],
-                          reportBuildPolicy: 'ALWAYS',
-                          results: [[path: 'test/e2e-wdio/allure-results']]
+            reportBuildPolicy: 'ALWAYS',
+            results: [[path: 'test/e2e-wdio/allure-results']]
         ])
     ansiColor('xterm') {
       sh '''
