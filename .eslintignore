@@ -4,3 +4,4 @@ coverage
 app/build
 app/build-testnet
 /test/e2e-wdio/
+/wdio.conf.js
