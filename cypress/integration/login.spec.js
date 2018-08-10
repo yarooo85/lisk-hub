@@ -1,0 +1,73 @@
+import accounts from '../../test/constants/accounts';
+
+describe('Login Page', () => {
+  beforeEach(() => cy.visit('/'));
+
+  it('Go to lisk.io link -> Browser opens lisk.io ', () => {
+    cy.contains('Go to lisk.io')
+      .should('have.attr', 'href', 'https://lisk.io');
+  });
+
+  it('Create lisk id -> Register account page', () => {
+    cy.get('.new-account-button').click();
+    cy.url().should('include', '/register');
+    cy.get('.multistep-back');
+  });
+
+  // Enable after lisk core 1.0 release on mainnet
+  xit('Logging in Mainnet by default ("Switch Network" is not set)', () => {
+  });
+
+  xit('Logging in Mainnet by default ("Switch Network" is false)', () => {
+  });
+
+  xit('Logging in Mainnet (Selected network)', () => {
+  });
+
+  it('Logging in Testnet', () => {
+    cy.server();
+    cy.route('GET', `https://testnet.lisk.io/api/accounts?address=${accounts.genesis.address}`).as('account');
+    window.localStorage.setItem('settings', '{"showNetwork": true}');
+    cy.reload();
+    cy.get('.network').click();
+    cy.get('ul li').eq(1).click();
+    cy.get('.passphrase input').click();
+    cy.get('.passphrase input').each(($el, index) => {
+      const passphraseWordsArray = accounts.genesis.passphrase.split(' ');
+      cy.wrap($el).type(passphraseWordsArray[index]);
+    });
+    cy.get('.login-button').click();
+    cy.wait('@account').its('responseBody.data.0.address').should('be.equal', accounts.genesis.address);
+    cy.url().should('include', '/dashboard');
+    cy.contains('Testnet');
+    cy.contains('https://testnet.lisk.io');
+  });
+
+  it.only('Logging in Devnet', () => {
+    cy.server();
+    cy.route('GET', `${Cypress.env('CORE_URL')}/api/accounts?address=${accounts.genesis.address}`).as('account');
+    window.localStorage.setItem('settings', '{"showNetwork": true}');
+    cy.reload();
+    cy.get('.network').click();
+    cy.get('ul li').eq(2).click();
+    cy.get('.address input').type(Cypress.env('CORE_URL'));
+    cy.get('.passphrase input').click();
+    cy.get('.passphrase input').each(($el, index) => {
+      const passphraseWordsArray = accounts.genesis.passphrase.split(' ');
+      cy.wrap($el).type(passphraseWordsArray[index]);
+    });
+    cy.get('.login-button').click();
+    cy.wait('@account');
+    cy.url().should('include', '/dashboard');
+    cy.contains('Custom Node');
+    cy.contains(Cypress.env('CORE_URL'));
+    // cy.log(window.localStorage.getItem('accounts'));
+  });
+
+  it('Network switcher available with ?showNetwork=true', () => {
+    cy.visit('?showNetwork=true');
+    cy.get('.network').should('be.visible');
+  });
+
+
+});
