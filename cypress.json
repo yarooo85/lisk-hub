@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:8080/#/",
+  "viewportWidth": 1500,
+  "viewportHeight": 1000,
+  "projectId": "1it63b",
+  "video": false,
+  "env": {
+    "CORE_URL": "http://localhost:4000"
+  }
+}
