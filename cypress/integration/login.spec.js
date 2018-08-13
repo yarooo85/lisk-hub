@@ -41,9 +41,14 @@ describe('Login Page', () => {
     cy.url().should('include', '/dashboard');
     cy.contains('Testnet');
     cy.contains('https://testnet.lisk.io');
+    cy.wait(1000).then(() => {
+      const account = JSON.parse(window.localStorage.getItem('accounts'))[0];
+      expect(account.network).to.eq(1);
+      expect(account.publicKey).to.eq(accounts.genesis.publicKey);
+    });
   });
 
-  it.only('Logging in Devnet', () => {
+  it('Logging in Devnet', () => {
     cy.server();
     cy.route('GET', `${Cypress.env('CORE_URL')}/api/accounts?address=${accounts.genesis.address}`).as('account');
     window.localStorage.setItem('settings', '{"showNetwork": true}');
@@ -61,7 +66,13 @@ describe('Login Page', () => {
     cy.url().should('include', '/dashboard');
     cy.contains('Custom Node');
     cy.contains(Cypress.env('CORE_URL'));
-    // cy.log(window.localStorage.getItem('accounts'));
+    cy.wait(1000).then(() => {
+      const account = JSON.parse(window.localStorage.getItem('accounts'))[0];
+      expect(account.network).to.eq(2);
+      expect(account.publicKey).to.eq(accounts.genesis.publicKey);
+      expect(account.peerAddress).to.eq(Cypress.env('CORE_URL'));
+      // expect(JSON.parse(window.localStorage.getItem('accounts'))[0].balance).to.eq(accounts.genesis.balance);
+    });
   });
 
   it('Network switcher available with ?showNetwork=true', () => {

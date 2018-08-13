@@ -3,7 +3,8 @@
   "viewportWidth": 1500,
   "viewportHeight": 1000,
   "projectId": "1it63b",
-  "video": false,
+  "video": true,
+  "integrationFolder": "cypress/integration",
   "env": {
     "CORE_URL": "http://localhost:4000"
   }

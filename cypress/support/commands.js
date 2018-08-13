@@ -23,16 +23,16 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-beforeEach(function () {
-  window.localStorage.setItem('settings',  '{"onBoarding": false}' );
+beforeEach(() => {
+  window.localStorage.setItem('settings', '{"onBoarding": false}');
 });
 
-Cypress.Commands.add('login', () => {
-  cy.request({
-    method: 'POST',
-    url: '',
-  })
-    .then((resp) => {
-      window.localStorage.setItem('jwt', resp.body.user.token);
-    });
+Cypress.Commands.add('login', (publicKey, network) => {
+  const accounts = [];
+  accounts.push({
+    publicKey,
+    network,
+    peerAddress: network === 2 ? Cypress.env('CORE_URL') : undefined,
+  });
+  window.localStorage.setItem('accounts', JSON.stringify(accounts));
 });

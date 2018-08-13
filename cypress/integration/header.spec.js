@@ -1,10 +1,24 @@
+import numeral from 'numeral';
 import accounts from '../../test/constants/accounts';
+import { fromRawLsk } from '../../src/utils/lsk';
 
 describe('Header', () => {
-  it.only('Balance is correct', () => {
-    cy.request('GET', `${Cypress.env('CORE_URL')}/api/accounts?address=${accounts.genesis.address}`);
+  beforeEach(() => {
+    cy.login(accounts.genesis.publicKey, 2);
     cy.visit('/dashboard');
-    cy.get('.copy-title').should('contain', accounts.genesis.address);
-    cy.get('.balance span').should('contain', accounts.genesis.balance);
   });
-};
+
+  it('Address is correct', () => {
+    cy.get('.copy-title').should('have.text', accounts.genesis.address);
+  });
+
+  it('Balance is correct', () => {
+    cy.get('.balance span').should('have.text', numeral(fromRawLsk(accounts.genesis.balance)).format('0,0.[0000000000000]'));
+  });
+
+  it('Avatar click -> Accounts page', () => {
+    cy.get('.saved-accounts').click();
+    cy.url().should('include', '/accounts');
+    cy.get('.add-lisk-id-card');
+  });
+});
