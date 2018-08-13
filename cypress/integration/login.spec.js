@@ -71,7 +71,8 @@ describe('Login Page', () => {
       expect(account.network).to.eq(2);
       expect(account.publicKey).to.eq(accounts.genesis.publicKey);
       expect(account.peerAddress).to.eq(Cypress.env('CORE_URL'));
-      // expect(JSON.parse(window.localStorage.getItem('accounts'))[0].balance).to.eq(accounts.genesis.balance);
+      // expect(JSON.parse(window.localStorage.getItem('accounts'))[0].balance)
+      // .to.eq(accounts.genesis.balance);
     });
   });
 
@@ -79,6 +80,4 @@ describe('Login Page', () => {
     cy.visit('?showNetwork=true');
     cy.get('.network').should('be.visible');
   });
-
-
 });
