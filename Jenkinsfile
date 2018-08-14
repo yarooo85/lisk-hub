@@ -98,7 +98,7 @@ node('lisk-hub') {
 	    cp -r ~/lisk-docker/examples/development $WORKSPACE/$BRANCH_NAME
 	    cd $WORKSPACE/$BRANCH_NAME
 	    cp /home/lisk/blockchain_explorer.db.gz ./blockchain.db.gz
-	    LISK_VERSION=1.0.0-rc.1
+	    LISK_VERSION=1.0.0-rc.2 make coldstart
 	    export CYPRESS_CORE_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
 	    cd -
             # Run end-to-end tests
@@ -120,10 +120,6 @@ node('lisk-hub') {
       '''
     }
   } finally {
-        allure([
-            reportBuildPolicy: 'ALWAYS',
-            results: [[path: 'test/e2e-wdio/allure-results']]
-        ])
     ansiColor('xterm') {
       sh '''
       cd $WORKSPACE/$BRANCH_NAME
