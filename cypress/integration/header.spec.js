@@ -4,7 +4,7 @@ import { fromRawLsk } from '../../src/utils/lsk';
 
 describe('Header', () => {
   beforeEach(() => {
-    cy.login(accounts.genesis.publicKey, 2);
+    cy.login(accounts.genesis, 2);
     cy.visit('/dashboard');
   });
 

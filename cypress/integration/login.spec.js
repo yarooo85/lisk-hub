@@ -30,7 +30,7 @@ describe('Login Page', () => {
     window.localStorage.setItem('settings', '{"showNetwork": true}');
     cy.reload();
     cy.get('.network').click();
-    cy.get('ul li').eq(1).click();
+    cy.get('ul li').eq(2).click();
     cy.get('.passphrase input').click();
     cy.get('.passphrase input').each(($el, index) => {
       const passphraseWordsArray = accounts.genesis.passphrase.split(' ');
@@ -54,7 +54,7 @@ describe('Login Page', () => {
     window.localStorage.setItem('settings', '{"showNetwork": true}');
     cy.reload();
     cy.get('.network').click();
-    cy.get('ul li').eq(2).click();
+    cy.get('ul li').eq(3).click();
     cy.get('.address input').type(Cypress.env('CORE_URL'));
     cy.get('.passphrase input').click();
     cy.get('.passphrase input').each(($el, index) => {

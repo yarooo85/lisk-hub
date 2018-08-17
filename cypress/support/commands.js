@@ -27,10 +27,10 @@ beforeEach(() => {
   window.localStorage.setItem('settings', '{"onBoarding": false}');
 });
 
-Cypress.Commands.add('login', (publicKey, network) => {
+Cypress.Commands.add('login', (account, network) => {
   const accounts = [];
   accounts.push({
-    publicKey,
+    publicKey: account.publicKey,
     network,
     peerAddress: network === 2 ? Cypress.env('CORE_URL') : undefined,
   });
