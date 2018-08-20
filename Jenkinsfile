@@ -94,7 +94,7 @@ node('lisk-hub') {
 	        LISK_VERSION=1.0.0-rc.2 make coldstart
             # Run end-to-end tests
             export CYPRESS_baseUrl=http://127.0.0.1:300$N/#/
-	        export CYPRESS_CORE_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
+	        export CYPRESS_CORE_URL=http://localhost:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
 	        cd -
 	        npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
             npm run cypress:run -- --record

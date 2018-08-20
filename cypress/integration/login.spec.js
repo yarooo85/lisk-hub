@@ -50,7 +50,7 @@ describe('Login Page', () => {
     cy.reload();
     cy.get('.network').click();
     cy.get('ul li').eq(3).click();
-    cy.get('.address input').type('http://94.237.41.191:7000');
+    cy.get('.address input').type(Cypress.env('CORE_URL'));
     cy.get('.passphrase input').click();
     cy.get('.passphrase input').each(($el, index) => {
       const passphraseWordsArray = accounts.genesis.passphrase.split(' ');
