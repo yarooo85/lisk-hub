@@ -43,7 +43,7 @@ describe('Login Page', () => {
     });
   });
 
-  xit('Logging in Devnet', () => {
+  it('Logging in Devnet', () => {
     cy.server();
     cy.route('GET', `${Cypress.env('CORE_URL')}/api/accounts?address=${accounts.genesis.address}`).as('account');
     window.localStorage.setItem('settings', '{"showNetwork": true}');
