@@ -2,7 +2,7 @@ import numeral from 'numeral';
 import accounts from '../../test/constants/accounts';
 import { fromRawLsk } from '../../src/utils/lsk';
 
-describe('Header', () => {
+describe.skip('Header', () => {
   beforeEach(() => {
     cy.login(accounts.genesis, 2);
     cy.visit('/dashboard');
