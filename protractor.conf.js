@@ -34,4 +34,3 @@ exports.config = {
     reportFile: 'cucumber_report.json',
   },
 };
-//curl --silent --fail --output /dev/null http://127.0.0.1:4000/api/accounts && echo OK
