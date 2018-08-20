@@ -71,12 +71,11 @@ const passphraseUsed = (store, action) => {
 
 const checkTransactionsAndUpdateAccount = (store, action) => {
   const state = store.getState();
-  const { peers, account, transactions } = state;
+  const { account, transactions } = state;
 
   store.dispatch(updateTransactionsIfNeeded(
     {
       transactions,
-      activePeer: peers.data,
       account,
     },
     action.data.windowIsFocused,
@@ -117,6 +116,9 @@ const accountMiddleware = store => next => (action) => {
       break;
     case actionTypes.passphraseUsed:
       passphraseUsed(store, action);
+      break;
+    case actionTypes.accountLoggedOut:
+      localStorage.removeItem('accounts');
       break;
     default: break;
   }
