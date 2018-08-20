@@ -19,7 +19,6 @@ node('lisk-hub') {
         cache_file = restoreCache("package.json")
         sh '''
         npm install
-        ./node_modules/protractor/bin/webdriver-manager update
         '''
         saveCache(cache_file, './node_modules', 10)
       } catch (err) {
@@ -85,18 +84,21 @@ node('lisk-hub') {
         ansiColor('xterm') {
           withCredentials([string(credentialsId: 'lisk-hub-testnet-passphrase', variable: 'TESTNET_PASSPHRASE')]) {
             sh '''
-            N=${EXECUTOR_NUMBER:-0}; N=$((N+1))
+            export N=${EXECUTOR_NUMBER:-0}; N=$((N+1))
             # End to End test configuration
             export DISPLAY=:1$N
             Xvfb :1$N -ac -screen 0 1280x1024x24 &
-	    cp -r ~/lisk-docker/examples/development $WORKSPACE/$BRANCH_NAME
-	    cd $WORKSPACE/$BRANCH_NAME
-	    cp /home/lisk/blockchain_explorer.db.gz ./blockchain.db.gz
-	    LISK_VERSION=1.0.0-rc.2 make coldstart
-	    export CYPRESS_CORE_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
-	    cd -
+	        cp -r ~/lisk-docker/examples/development $WORKSPACE/$BRANCH_NAME
+	        cd $WORKSPACE/$BRANCH_NAME/development
+	        cp /home/lisk/blockchain_explorer.db.gz ./blockchain.db.gz
+	        LISK_VERSION=1.0.0-rc.2 make coldstart
             # Run end-to-end tests
-         ./node_modules/.bin/cypress run --record
+            export CYPRESS_baseUrl=http://127.0.0.1:300$N/#/
+	        export CYPRESS_CORE_URL=http://127.0.0.1:$( docker-compose port lisk 4000 |cut -d ":" -f 2 )
+	        cd -
+	        cd ..
+	        npm run serve --  $WORKSPACE/app/build -p 300$N -a 127.0.0.1 &>server.log &
+            npm run cypress:run -- --record
             '''
           }
         }
@@ -109,7 +111,7 @@ node('lisk-hub') {
     echo "Error: ${err}"
     ansiColor('xterm') {
       sh '''
-      cd $WORKSPACE/$BRANCH_NAME
+      cd $WORKSPACE/$BRANCH_NAME/development
       docker-compose logs
       '''
     }
