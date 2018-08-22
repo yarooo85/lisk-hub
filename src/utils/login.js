@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import settings from './../constants/settings';
 
 const addHttp = (url) => {
   const reg = /^(?:f|ht)tps?:\/\//i;
@@ -30,3 +31,13 @@ export const validateUrl = (value) => {
 
   return { address: value, addressValidity };
 };
+
+
+export const getAutoLogInData = () => ({
+  [settings.keys.autologin]: localStorage.getItem(settings.keys.autologin),
+  [settings.keys.autologinKey]: localStorage.getItem(settings.keys.autologinKey),
+  [settings.keys.autologinUrl]: localStorage.getItem(settings.keys.autologinUrl),
+});
+
+export const shouldAutoLogIn = autologin =>
+  autologin[settings.keys.autologin] && autologin[settings.keys.autologinKey];
